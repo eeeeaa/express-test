@@ -1,14 +1,25 @@
 const express = require("express");
+const path = require("node:path");
 const app = express();
 
 const userRouter = require("./routes/users");
 const indexRouter = require("./routes/index");
+const aboutRouter = require("./routes/about");
+
+//setup static assets
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
+
+//setup view engines
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // parses form payloads and sets it to the `req.body`
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
 app.use("/users", userRouter);
+app.use("/about", aboutRouter);
 
 // Every thrown error in the application or the previous middleware function calling `next`
 // with an error as an argument will eventually go to this middleware function

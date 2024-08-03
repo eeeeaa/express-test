@@ -1,4 +1,4 @@
-const userModel = require("../model/user");
+const userModel = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const { CustomNotFoundError } = require("../utils/customError");
 
